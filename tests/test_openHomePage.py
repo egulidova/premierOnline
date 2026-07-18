@@ -39,7 +39,7 @@ def test_check_logo(home_page):
 
 def test_check_sign_in(home_page):
 
-    sign_in_button = home_page.locator("a[href='https://www.premieronline.com/action/dologin']").first()
+    sign_in_button = home_page.locator("a[href='https://www.premieronline.com/action/dologin']").first 
     expect(sign_in_button).to_be_visible()
     expect(sign_in_button).to_have_attribute("href","https://www.premieronline.com/action/dologin")
 
