@@ -1,5 +1,6 @@
 import pytest
 from playwright.sync_api import Page, expect
+from pages.home_page import HomePage
 
 BASE_URL = "https://www.premieronline.com/"
 
@@ -8,18 +9,14 @@ def home_page(page):
     page.goto(BASE_URL)
     return page
 
-@pytest.mark.parametrize(
-    "name, href",
-    [
-        ("Events", "https://www.premieronline.com/calendar"),
-        ("Ratings", "https://www.premieronline.com/event_ratings.php"),
-        ("Help", "https://www.premieronline.com/help"),
-        ("عربى", "https://www.premieronline.com/action/lang.php?lang=ar"),
-    ],
-)
+@pytest.mark.parametrize("name, href", HomePage.MENU_ITEMS)
 
 def test_navigation_menu(home_page, name, href):
+    
     link = home_page.get_by_role("link", name=name, exact=True)
+ 
+    expect(link).to_be_visible()
+    expect(link).to_have_attribute("href", href)
 
 def test_open_home_page(home_page):
 
